@@ -29,7 +29,7 @@ class Ultrametric(nx.DiGraph):
         self.add_edges_from([(node_id, n1), (node_id, n2)])
         return node_id
 
-    def get_map(self, t=0.5):
+    def get_map(self, t=np.inf):
         """Compute a map from leaf nodes to roots at a certain height."""
         nodes = filter(lambda n: self.node[n]['w'] < t, self.nodes())
         g = self.subgraph(nodes)
