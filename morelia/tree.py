@@ -1,15 +1,9 @@
 # built-ins
 import itertools as it
-import argparse
-import random
-import sys
-import logging
-import json
 
 # libraries
 import numpy as np
 import networkx as nx
-from scipy.misc import comb as nchoosek
 
 # local modules
 
