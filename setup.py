@@ -1,0 +1,37 @@
+#from distutils.core import setup
+from setuptools import setup
+
+descr = """Tree representations and algorithms for Python.
+
+Morelia is named after the green tree python, Morelia viridis.
+"""
+
+DISTNAME            = 'morelia'
+DESCRIPTION         = 'Tree data structures and algorithms'
+LONG_DESCRIPTION    = descr
+MAINTAINER          = 'Juan Nunez-Iglesias'
+MAINTAINER_EMAIL    = 'juan.n@unimelb.edu.au'
+URL                 = 'https://github.com/jni/morelia'
+LICENSE             = 'BSD 3-clause'
+DOWNLOAD_URL        = 'https://github.com/jni/morelia'
+VERSION             = '0.1-dev'
+PYTHON_VERSION      = (2, 7)
+INST_DEPENDENCIES   = {} 
+
+
+if __name__ == '__main__':
+
+    setup(name=DISTNAME,
+        version=VERSION,
+        url=URL,
+        description=DESCRIPTION,
+        long_description=LONG_DESCRIPTION,
+        author=MAINTAINER,
+        author_email=MAINTAINER_EMAIL,
+        license=LICENSE,
+        packages=['morelia'],
+        package_data={},
+        install_requires=INST_DEPENDENCIES,
+        scripts=[]
+    )
+
