@@ -30,8 +30,9 @@ class Ultrametric(nx.DiGraph):
     def merge(self, u, v, w=0.0):
         node_id = self.id_counter.next()
         self.maxw = max(w, self.maxw)
+        subtree_maxw = max(w, self.node[u]['w'], self.node[v]['w'])
         num_leaves = self.num_leaves(u) + self.num_leaves(v)
-        self.add_node(node_id, w=self.maxw, num_leaves=num_leaves)
+        self.add_node(node_id, w=subtree_maxw, num_leaves=num_leaves)
         self.add_edges_from([(node_id, u), (node_id, v)])
         return node_id
 
