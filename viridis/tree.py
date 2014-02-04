@@ -66,9 +66,45 @@ class Ultrametric(nx.DiGraph):
         for n in a:
             self.node[n]['num_leaves'] -= num_leaves
 
-    def get_map(self, t=np.inf):
-        """Compute a map from leaf nodes to roots at a certain height."""
-        nodes = filter(lambda n: self.node[n]['w'] < t, self.nodes())
+    def get_map(self, t=np.inf, source=None):
+        """Compute a map from leaf nodes to roots at a certain height.
+        
+        Parameters
+        ----------
+        t : float, optional
+            The threshold at which to cut the tree.
+        source : int, optional
+            Compute the map only for the tree rooted at `source`.
+
+        Examples
+        --------
+        >>> t = Ultrametric(np.arange(6)) # tree with 6 leaves
+        >>> t.merge(0, 1, 0.1) # merge nodes 1 and 2
+        6
+        >>> t.merge(2, 6, 0.2)
+        7
+        >>> t.merge(3, 7, 0.3)
+        8
+        >>> t.merge(4, 5, 0.1)
+        9
+        >>> t.merge(7, 8, 0.2)
+        10
+        >>> t.get_map(0.25)
+        array([7, 7, 7, 3, 9, 9])
+        >>> t.get_map(source=7)
+        array([7, 7, 7])
+        >>> t.get_map(source=9)
+        array([0, 0, 0, 0, 9, 9])
+        >>> t.get_map(0.15, 7)
+        array([6, 6, 2])
+        """
+        if source is not None:
+            des = nx.algorithms.dag.descendants(self, source)
+            des.add(source)
+            g = self.subgraph(des)
+        else:
+            g = self
+        nodes = filter(lambda n: self.node[n]['w'] < t, g.nodes())
         g = self.subgraph(nodes)
         ccs = nx.algorithms.connected_components(g.to_undirected())
         ccs = [self.subgraph(ns) for ns in ccs]
