@@ -28,6 +28,26 @@ class Ultrametric(nx.DiGraph):
         self.id_counter = it.count(max([0] + init_nodes) + 1)
 
     def merge(self, u, v, w=0.0):
+        """Merge two nodes u, v and return the ID of the new node.
+
+        Parameters
+        ----------
+        u, v : int
+            The nodes being merged.
+        w : float
+            The weight of the merge.
+
+        Returns
+        -------
+        node_id : int
+            The generated ID of the node resulting from the (u, v)
+            merge.
+
+        Notes
+        -----
+        To preserve the ultrametric condition, the true weight of the
+        merge is the maximum of w, weight(u), and weight(v).
+        """
         node_id = self.id_counter.next()
         self.maxw = max(w, self.maxw)
         subtree_maxw = max(w, self.node[u]['w'], self.node[v]['w'])
