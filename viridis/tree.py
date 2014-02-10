@@ -175,3 +175,9 @@ class Ultrametric(nx.DiGraph):
 
 def num_leaves(g, n):
     return g.node[n]['num_leaves']
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
+
