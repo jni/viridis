@@ -8,6 +8,37 @@ import networkx as nx
 # local modules
 
 def lowest_common_ancestor(t, u, v):
+    """Find the lowest common ancestor of two nodes
+
+    Parameters
+    ----------
+    t : an `Ultrametric` tree or `nx.DiGraph`
+        The tree or directed acyclic graph on which to find ancestors.
+    u, v : int
+        The node IDs in `t` for which to find the common ancestor
+
+    Returns
+    -------
+    c : int or None
+        The lowest common ancestor of `u` and `v` in `t`. ``None`` if
+        they do not have any common ancestors.
+
+    Examples
+    --------
+    >>> t = Ultrametric([0, 1, 2])
+    >>> t.merge(0, 1)
+    3
+    >>> t.merge(2, 3)
+    4
+    >>> t.ancestors(0)
+    [3, 4]
+    >>> t.ancestors(1)
+    [3, 4]
+    >>> t.ancestors(2)
+    [4]
+    >>> lowest_common_ancestor(t, 0, 1)
+    3
+    """
     au = t.ancestors(u)
     av = t.ancestors(v)
     common = set(au) & set(av)
