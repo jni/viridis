@@ -12,9 +12,9 @@ def lowest_common_ancestor(t, u, v):
     av = t.ancestors(v)
     common = set(au) & set(av)
     short = au if len(au) < len(av) else av
-    for s in short:
-        if s in common:
-            return s
+    for c in short:
+        if c in common:
+            return c
     return None
 
 lca = lowest_common_ancestor
