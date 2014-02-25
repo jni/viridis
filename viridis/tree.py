@@ -135,7 +135,7 @@ class Ultrametric(nx.DiGraph):
             g = self.subgraph(des)
         else:
             g = self
-        nodes = filter(lambda n: self.node[n]['w'] < t, g.nodes())
+        nodes = filter(lambda n: self.node[n]['w'] <= t, g.nodes())
         g = self.subgraph(nodes)
         ccs = nx.algorithms.connected_components(g.to_undirected())
         ccs = [self.subgraph(ns) for ns in ccs]
@@ -180,4 +180,3 @@ def num_leaves(g, n):
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
-
