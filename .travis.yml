@@ -1,0 +1,28 @@
+language: python
+sudo: false
+python:
+    - 2.7
+    - 3.4
+virtualenv:
+    system_site_packages: false
+before_install:
+    - export DISPLAY=:99.0
+    - wget http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh -O miniconda.sh
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
+    - conda info -a
+
+    - conda create -q -n viridis-test python=$TRAVIS_PYTHON_VERSION numpy setuptools pip networkx six
+    - source activate viridis-test
+
+    - pip install pytest pytest-cov
+    - pip install coveralls
+
+script:
+    - python setup.py develop
+    - py.test
+
+after_success:
+    - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then coveralls; fi

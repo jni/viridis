@@ -1,9 +1,13 @@
+from __future__ import absolute_import
 # built-ins
 import itertools as it
 
 # libraries
 import numpy as np
 import networkx as nx
+from six.moves import filter
+from six.moves import map
+from six.moves import zip
 
 # local modules
 
@@ -38,6 +42,9 @@ def lowest_common_ancestor(t, u, v):
     [4]
     >>> lowest_common_ancestor(t, 0, 1)
     3
+    >>> t.split(0, 2)
+    >>> lowest_common_ancestor(t, 1, 2) is None
+    True
     """
     au = t.ancestors(u)
     av = t.ancestors(v)
@@ -79,7 +86,7 @@ class Ultrametric(nx.DiGraph):
         To preserve the ultrametric condition, the true weight of the
         merge is the maximum of w, weight(u), and weight(v).
         """
-        node_id = self.id_counter.next()
+        node_id = next(self.id_counter)
         self.maxw = max(w, self.maxw)
         subtree_maxw = max(w, self.node[u]['w'], self.node[v]['w'])
         num_leaves = self.num_leaves(u) + self.num_leaves(v)
@@ -135,13 +142,13 @@ class Ultrametric(nx.DiGraph):
             g = self.subgraph(des)
         else:
             g = self
-        nodes = filter(lambda n: self.node[n]['w'] <= t, g.nodes())
+        nodes = [n for n in g.nodes() if self.node[n]['w'] <= t]
         g = self.subgraph(nodes)
         ccs = nx.algorithms.connected_components(g.to_undirected())
         ccs = [self.subgraph(ns) for ns in ccs]
-        leavess = [filter(h.is_leaf, h.nodes()) for h in ccs]
-        roots = [filter(h.is_root, h.nodes()) for h in ccs]
-        max_leaf = max(map(max, leavess))
+        leavess = [list(filter(h.is_leaf, h.nodes())) for h in ccs]
+        roots = [list(filter(h.is_root, h.nodes())) for h in ccs]
+        max_leaf = max(list(map(max, leavess)))
         forward_map = np.zeros(max_leaf + 1, int)
         for root, leaves in zip(roots, leavess):
             forward_map[leaves] = root
@@ -177,6 +184,6 @@ def num_leaves(g, n):
     return g.node[n]['num_leaves']
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':   # pragma: no cover
     import doctest
     doctest.testmod()
