@@ -20,3 +20,8 @@ def test_split(base_tree):
     assert t.node[9]['num_leaves'] == 3
     t.split(0, 4) # nothing to do
     assert t.node[9]['num_leaves'] == 3
+
+
+def test_children(base_tree):
+    t = base_tree
+    assert t.children(6) == [0, 1]
