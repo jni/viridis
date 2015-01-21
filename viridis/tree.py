@@ -184,6 +184,6 @@ def num_leaves(g, n):
     return g.node[n]['num_leaves']
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':   # pragma: no cover
     import doctest
     doctest.testmod()
