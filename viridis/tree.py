@@ -42,6 +42,9 @@ def lowest_common_ancestor(t, u, v):
     [4]
     >>> lowest_common_ancestor(t, 0, 1)
     3
+    >>> t.split(0, 2)
+    >>> lowest_common_ancestor(t, 1, 2) is None
+    True
     """
     au = t.ancestors(u)
     av = t.ancestors(v)
