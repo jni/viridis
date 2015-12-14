@@ -153,7 +153,22 @@ class Ultrametric(nx.DiGraph):
         for root, leaves in zip(roots, leavess):
             forward_map[leaves] = root
         return forward_map
-    
+
+    def leaves(self, node):
+        """Get all the leaves rooted at `node`.
+
+        Parameters
+        ----------
+        node : int
+            The ancestor of all leaves we want.
+
+        Returns
+        -------
+        leaves : iter of int
+            The leaves of `node`.
+        """
+        return filter(self.is_leaf, nx.descendants(self, node))
+
     def is_leaf(self, node):
         return self.out_degree(node) == 0
 
