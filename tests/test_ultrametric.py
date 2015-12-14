@@ -25,3 +25,10 @@ def test_split(base_tree):
 def test_children(base_tree):
     t = base_tree
     assert t.children(6) == [0, 1]
+
+
+def test_leaves(base_tree):
+    t = base_tree
+    assert set(t.leaves(10)) == set(range(6))
+    assert set(t.leaves(6)) == set([0, 1])
+    assert set(t.leaves(9)) == set(range(3, 6))
