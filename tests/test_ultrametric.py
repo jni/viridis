@@ -10,16 +10,16 @@ def base_tree():
     t.merge(6, 2, 0.2)
     t.merge(3, 4, 0.3)
     t.merge(8, 5, 0.4)
-    t.merge(7, 8, 0.5)
+    t.merge(7, 9, 0.5)
     return t
 
 
 def test_split(base_tree):
     t = base_tree
     t.split(0, 2)
-    assert t.node[9]['num_leaves'] == 3
+    assert t.node[10]['num_leaves'] == 3
     t.split(0, 4) # nothing to do
-    assert tree.num_leaves(t, 9) == 3
+    assert tree.num_leaves(t, 10) == 3
 
 
 def test_children(base_tree):
