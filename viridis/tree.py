@@ -137,7 +137,7 @@ class Ultrametric(nx.DiGraph):
         array([6, 6, 2])
         """
         if source is not None:
-            des = nx.algorithms.dag.descendants(self, source)
+            des = nx.descendants(self, source)
             des.add(source)
             g = self.subgraph(des)
         else:
