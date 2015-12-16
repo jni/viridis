@@ -192,6 +192,31 @@ class Ultrametric(nx.DiGraph):
             a.append(node)
         return a
 
+    def highest_ancestor(self, n):
+        """Return the earliest ancestor of node `n`.
+
+        In a complete tree, this returns the root.
+
+        Parameters
+        ----------
+        n : int
+            The query node.
+
+        Returns
+        -------
+        a : int
+            The highest possible ancestor of `n`.
+
+        Notes
+        -----
+        This is equivalent to `self.ancestors(n)[-1]`, but slightly
+        more efficient, because it avoids the creation of intermediate
+        lists.
+        """
+        while self.parent(n) is not None:
+            n = self.parent(n)
+        return n
+
     def children(self, n):
         return self.successors(n)
 
