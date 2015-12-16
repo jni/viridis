@@ -6,11 +6,11 @@ import pytest
 @pytest.fixture
 def base_tree():
     t = tree.Ultrametric(list(range(6)))
-    t.merge(0, 1, 0.1)
-    t.merge(6, 2, 0.2)
-    t.merge(3, 4, 0.3)
-    t.merge(8, 5, 0.4)
-    t.merge(7, 9, 0.5)
+    t.merge(0, 1, 0.1)  # 6
+    t.merge(6, 2, 0.2)  # 7
+    t.merge(3, 4, 0.3)  # 8
+    t.merge(8, 5, 0.4)  # 9
+    t.merge(7, 9, 0.5)  # 10
     return t
 
 
