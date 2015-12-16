@@ -137,7 +137,7 @@ class Ultrametric(nx.DiGraph):
         array([6, 6, 2])
         """
         if source is not None:
-            des = nx.algorithms.dag.descendants(self, source)
+            des = nx.descendants(self, source)
             des.add(source)
             g = self.subgraph(des)
         else:
@@ -153,7 +153,22 @@ class Ultrametric(nx.DiGraph):
         for root, leaves in zip(roots, leavess):
             forward_map[leaves] = root
         return forward_map
-    
+
+    def leaves(self, node):
+        """Get all the leaves rooted at `node`.
+
+        Parameters
+        ----------
+        node : int
+            The ancestor of all leaves we want.
+
+        Returns
+        -------
+        leaves : iter of int
+            The leaves of `node`.
+        """
+        return filter(self.is_leaf, nx.descendants(self, node))
+
     def is_leaf(self, node):
         return self.out_degree(node) == 0
 
@@ -176,6 +191,31 @@ class Ultrametric(nx.DiGraph):
             node = self.parent(node)
             a.append(node)
         return a
+
+    def highest_ancestor(self, n):
+        """Return the earliest ancestor of node `n`.
+
+        In a complete tree, this returns the root.
+
+        Parameters
+        ----------
+        n : int
+            The query node.
+
+        Returns
+        -------
+        a : int
+            The highest possible ancestor of `n`.
+
+        Notes
+        -----
+        This is equivalent to `self.ancestors(n)[-1]`, but slightly
+        more efficient, because it avoids the creation of intermediate
+        lists.
+        """
+        while self.parent(n) is not None:
+            n = self.parent(n)
+        return n
 
     def children(self, n):
         return self.successors(n)
