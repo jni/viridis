@@ -32,3 +32,12 @@ def test_leaves(base_tree):
     assert set(t.leaves(10)) == set(range(6))
     assert set(t.leaves(6)) == set([0, 1])
     assert set(t.leaves(9)) == set(range(3, 6))
+
+
+def test_highest(base_tree):
+    t = base_tree
+    for i in range(t.number_of_nodes()):
+        assert t.highest_ancestor(i) == 10
+    t.remove_node(10)
+    t.remove_node(9)
+    assert t.highest_ancestor(4) == 8
