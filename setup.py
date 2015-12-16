@@ -16,7 +16,7 @@ URL                 = 'https://github.com/jni/viridis'
 LICENSE             = 'BSD 3-clause'
 DOWNLOAD_URL        = 'https://github.com/jni/viridis'
 VERSION             = '0.4-dev'
-PYTHON_VERSION      = (2, 7)
+PYTHON_VERSION      = (3, 5)
 INST_DEPENDENCIES   = {} 
 
 
