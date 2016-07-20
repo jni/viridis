@@ -17,7 +17,7 @@ LICENSE             = 'BSD 3-clause'
 DOWNLOAD_URL        = 'https://github.com/jni/viridis'
 VERSION             = '0.4.0'
 PYTHON_VERSION      = (3, 5)
-INST_DEPENDENCIES   = {} 
+INST_DEPENDENCIES   = {}
 
 
 if __name__ == '__main__':
