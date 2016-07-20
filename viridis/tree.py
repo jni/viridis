@@ -5,9 +5,6 @@ import itertools as it
 # libraries
 import numpy as np
 import networkx as nx
-from six.moves import filter
-from six.moves import map
-from six.moves import zip
 
 # local modules
 
@@ -59,7 +56,7 @@ lca = lowest_common_ancestor
 
 class Ultrametric(nx.DiGraph):
     """An ultrametric tree data structure"""
-    def __init__(self, init_nodes=[]):
+    def __init__(self, init_nodes=()):
         super(Ultrametric, self).__init__()
         self.maxw = -np.inf
         self.add_nodes_from(init_nodes, w=self.maxw, num_leaves=1)
@@ -106,7 +103,7 @@ class Ultrametric(nx.DiGraph):
 
     def get_map(self, t=np.inf, source=None):
         """Compute a map from leaf nodes to roots at a certain height.
-        
+
         Parameters
         ----------
         t : float, optional

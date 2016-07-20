@@ -1,5 +1,4 @@
 from viridis import tree
-from six.moves import range
 
 import pytest
 
