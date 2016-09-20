@@ -15,7 +15,7 @@ MAINTAINER_EMAIL    = 'juan.n@unimelb.edu.au'
 URL                 = 'https://github.com/jni/viridis'
 LICENSE             = 'BSD 3-clause'
 DOWNLOAD_URL        = 'https://github.com/jni/viridis'
-VERSION             = '0.4.0'
+VERSION             = '0.4.1'
 PYTHON_VERSION      = (3, 5)
 INST_DEPENDENCIES   = {}
 
@@ -38,6 +38,7 @@ if __name__ == '__main__':
             'License :: OSI Approved :: BSD License',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.5',
             'Topic :: Scientific/Engineering',
             'Operating System :: Microsoft :: Windows',
             'Operating System :: POSIX',
