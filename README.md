@@ -5,7 +5,7 @@
 
 Viridis is a Python library for tree data and algorithms. It is named
 after _Morelia viridis_, the green tree python. It is compatible with and tested
-with 100% coverage on both Python 2.7 and Python 3.4.
+with 100% coverage on Python 3.5.
 
 It is based on the excellent NetworkX graph library.
 
