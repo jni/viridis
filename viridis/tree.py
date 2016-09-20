@@ -60,7 +60,7 @@ class Ultrametric(nx.DiGraph):
         super(Ultrametric, self).__init__()
         self.maxw = -np.inf
         self.add_nodes_from(init_nodes, w=self.maxw, num_leaves=1)
-        self.id_counter = it.count(max([0] + init_nodes) + 1)
+        self.id_counter = it.count(max(0, np.max(init_nodes)) + 1)
 
     def merge(self, u, v, w=0.0):
         """Merge two nodes u, v and return the ID of the new node.
