@@ -1,28 +1,39 @@
 language: python
 sudo: false
 python:
-    - 2.7
-    - 3.4
+    - 3.5
 virtualenv:
     system_site_packages: false
-before_install:
+install:
+    - export CONDA=$HOME/miniconda
+    - export PATH="$CONDA/bin:$PATH"
     - export DISPLAY=:99.0
-    - wget http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh -O miniconda.sh
-    - bash miniconda.sh -b -p $HOME/miniconda
-    - export PATH="$HOME/miniconda/bin:$PATH"
+    # install conda, but only if it doesn't already exist (Travis cache)
+    - command -v conda > /dev/null || {
+        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        bash miniconda.sh -b -f -p $CONDA; }
     - conda config --set always_yes yes --set changeps1 no
     - conda update -q conda
-    - conda info -a
 
-    - conda create -q -n viridis-test python=$TRAVIS_PYTHON_VERSION numpy setuptools pip networkx six
+    # try to create env, but ignore if it fails -- probably cached
+    - conda create -q -n viridis-test python=$TRAVIS_PYTHON_VERSION numpy setuptools pip networkx || true
     - source activate viridis-test
+    - conda info -a
 
     - pip install pytest pytest-cov
     - pip install coveralls
+
+    # install local viridis directory
+    - pip install -e .
 
 script:
     - python setup.py develop
     - py.test
 
 after_success:
-    - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then coveralls; fi
+    - if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then coveralls; fi
+
+cache:
+    directories:
+        - $HOME/miniconda
+        - $HOME/.matplotlib
