@@ -15,7 +15,7 @@ MAINTAINER_EMAIL    = 'juan.n@unimelb.edu.au'
 URL                 = 'https://github.com/jni/viridis'
 LICENSE             = 'BSD 3-clause'
 DOWNLOAD_URL        = 'https://github.com/jni/viridis'
-VERSION             = '0.4.1'
+VERSION             = '0.4.2-dev'
 PYTHON_VERSION      = (3, 5)
 INST_DEPENDENCIES   = {}
 
