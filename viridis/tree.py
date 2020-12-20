@@ -85,7 +85,7 @@ class Ultrametric(nx.DiGraph):
         """
         node_id = next(self.id_counter)
         self.maxw = max(w, self.maxw)
-        subtree_maxw = max(w, self.node[u]['w'], self.node[v]['w'])
+        subtree_maxw = max(w, self.nodes[u]['w'], self.nodes[v]['w'])
         num_leaves = self.num_leaves(u) + self.num_leaves(v)
         self.add_node(node_id, w=subtree_maxw, num_leaves=num_leaves)
         self.add_edges_from([(node_id, u), (node_id, v)])
@@ -96,10 +96,10 @@ class Ultrametric(nx.DiGraph):
         if split_node is None:
             return
         a = self.ancestors(split_node)
-        num_leaves = self.node[split_node]['num_leaves']
+        num_leaves = self.nodes[split_node]['num_leaves']
         self.remove_node(split_node)
         for n in a:
-            self.node[n]['num_leaves'] -= num_leaves
+            self.nodes[n]['num_leaves'] -= num_leaves
 
     def get_map(self, t=np.inf, source=None):
         """Compute a map from leaf nodes to roots at a certain height.
@@ -139,7 +139,7 @@ class Ultrametric(nx.DiGraph):
             g = self.subgraph(des)
         else:
             g = self
-        nodes = [n for n in g.nodes() if self.node[n]['w'] <= t]
+        nodes = [n for n in g.nodes() if self.nodes[n]['w'] <= t]
         g = self.subgraph(nodes)
         ccs = nx.algorithms.connected_components(g.to_undirected())
         ccs = [self.subgraph(ns) for ns in ccs]
@@ -173,7 +173,7 @@ class Ultrametric(nx.DiGraph):
         return self.in_degree(node) == 0
 
     def num_leaves(self, n):
-        return self.node[n]['num_leaves']
+        return self.nodes[n]['num_leaves']
 
     def parent(self, n):
         p = self.predecessors(n)
