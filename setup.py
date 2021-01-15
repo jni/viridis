@@ -15,7 +15,7 @@ MAINTAINER_EMAIL    = 'juan.nunez-iglesias@monash.edu'
 URL                 = 'https://github.com/jni/viridis'
 LICENSE             = 'BSD 3-clause'
 DOWNLOAD_URL        = 'https://github.com/jni/viridis'
-VERSION             = '0.5-dev'
+VERSION             = '0.5.0'
 PYTHON_VERSION      = (3, 5)
 INST_DEPENDENCIES   = []
 
