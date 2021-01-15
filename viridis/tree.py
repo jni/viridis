@@ -176,7 +176,7 @@ class Ultrametric(nx.DiGraph):
         return self.nodes[n]['num_leaves']
 
     def parent(self, n):
-        p = self.predecessors(n)
+        p = list(self.predecessors(n))
         if len(p) == 1:
             return p[0]
         return None
@@ -218,7 +218,7 @@ class Ultrametric(nx.DiGraph):
         return self.successors(n)
 
 def num_leaves(g, n):
-    return g.node[n]['num_leaves']
+    return g.nodes[n]['num_leaves']
 
 
 if __name__ == '__main__':   # pragma: no cover

@@ -16,14 +16,14 @@ def base_tree():
 def test_split(base_tree):
     t = base_tree
     t.split(0, 2)
-    assert t.node[10]['num_leaves'] == 3
+    assert t.nodes[10]['num_leaves'] == 3
     t.split(0, 4) # nothing to do
     assert tree.num_leaves(t, 10) == 3
 
 
 def test_children(base_tree):
     t = base_tree
-    assert t.children(6) == [0, 1]
+    assert list(t.children(6)) == [0, 1]
 
 
 def test_leaves(base_tree):
